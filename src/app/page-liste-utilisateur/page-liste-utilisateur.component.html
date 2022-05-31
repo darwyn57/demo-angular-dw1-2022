@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let utilisateur of listeUtilisateur">
+    {{ utilisateur.prenom }} {{ utilisateur.nom }}
+    <ul>
+      <li *ngFor="let comp of utilisateur.competences">{{ comp }}</li>
+    </ul>
+  </li>
+</ul>
