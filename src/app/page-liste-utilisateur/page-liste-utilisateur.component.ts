@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,15 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-liste-utilisateur.component.scss']
 })
 export class PageListeUtilisateurComponent implements OnInit {
-  public listeUtilisateur:any = [
-    {nom:"eljadid",prenom:"elhoussine" , competences:['java','php']},
-    {nom:"job",prenom:"steve" , competences:[]},
-    {nom:"jempf",prenom:"marc" , competences:['js','angular']},
-  ];
+  public listeUtilisateur:any = [];
 
-  constructor() { }
+  constructor(private client :HttpClient) { }
 
   ngOnInit(): void {
+    this.client
+    .get("http://demo.php/back-end-angular-dw1-2022/liste-utilisateur.php")
+    .subscribe(reponse=> this.listeUtilisateur =reponse)
+
+  }
+  onClickDelete(idUtilisateur : number) {
+    this.client
+    .get("http://demo.php/back-end-angular-dw1-2022/supprime-utilisateur.php?id=" + idUtilisateur)
+    .subscribe(reponse=> {})
   }
 
 }

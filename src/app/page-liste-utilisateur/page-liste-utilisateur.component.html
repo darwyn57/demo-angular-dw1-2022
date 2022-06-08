@@ -1,8 +1,40 @@
-<ul>
-  <li *ngFor="let utilisateur of listeUtilisateur">
-    {{ utilisateur.prenom }} {{ utilisateur.nom }}
-    <ul>
-      <li *ngFor="let comp of utilisateur.competences">{{ comp }}</li>
-    </ul>
-  </li>
-</ul>
+<div class="container">
+  <div class="row gx-4">
+    <div class="col-6" *ngFor="let utilisateur of listeUtilisateur">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>
+            {{ utilisateur.nom }}{{ utilisateur.prenom }}
+          </mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="{{ utilisateur.image }}"
+          alt="Photo
+        Inu"
+        />
+        <mat-card-content>
+          <ul>
+            <li *ngFor="let comp of utilisateur.competences">
+              {{ comp }}
+            </li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-raised-button
+            (click)="onClickDelete(utilisateur.id)"
+            color="warn"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
