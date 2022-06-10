@@ -12,15 +12,20 @@ export class PageListeUtilisateurComponent implements OnInit {
   constructor(private client :HttpClient) { }
 
   ngOnInit(): void {
+    this.rechargerListeUtilisateur();
+
+  }
+
+  rechargerListeUtilisateur(){
     this.client
     .get("http://demo.php/back-end-angular-dw1-2022/liste-utilisateur.php")
     .subscribe(reponse=> this.listeUtilisateur =reponse)
-
   }
+
   onClickDelete(idUtilisateur : number) {
     this.client
     .get("http://demo.php/back-end-angular-dw1-2022/supprime-utilisateur.php?id=" + idUtilisateur)
-    .subscribe(reponse=> {})
+    .subscribe(reponse=> this.rechargerListeUtilisateur())
   }
 
 }
