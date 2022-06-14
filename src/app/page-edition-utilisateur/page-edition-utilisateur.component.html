@@ -32,7 +32,11 @@
   />
   <div>
     {{ image?.name || 'Aucune image selectionnée' }}
-    <button (click)="fileInput.click()" mat-mini-fab color="primary">
+    <button
+      (click)="fileInput.click(); $event.preventDefault()"
+      mat-mini-fab
+      color="primary"
+    >
       <mat-icon>image</mat-icon>
     </button>
   </div>

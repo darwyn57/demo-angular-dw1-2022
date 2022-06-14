@@ -50,7 +50,7 @@ export class PageEditionUtilisateurComponent implements OnInit {
 
   onChangeFile(event:any){
     this.image = event.target.files[0];
-
+   
   }
 
 
@@ -67,8 +67,8 @@ export class PageEditionUtilisateurComponent implements OnInit {
       this.client.post("http://demo.php/back-end-angular-dw1-2022/edition-utilisateur.php",
       formData,
       { responseType: 'text'}
-      ).subscribe(resultat => console.log(resultat));
-      this.router.navigateByUrl('/utilisateur');
+      ).subscribe(resultat =>
+      this.router.navigateByUrl('/utilisateur'));
 
     }
   }
