@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 import { Utilisateur } from '../utilisateur';
 
@@ -32,7 +33,7 @@ export class PageEditionUtilisateurComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(parametres=> {
       if(parametres['id'] !=null){
-      this.client.get<Utilisateur>("http://demo.php/back-end-angular-dw1-2022/utilisateur.php?id="+parametres['id']).subscribe((utilisateur :Utilisateur)=> {
+      this.client.get<Utilisateur>("http://"+ environment.adresseServeur+"utilisateur.php?id="+parametres['id']).subscribe((utilisateur :Utilisateur)=> {
         this.formulaire =this.formBuilder.group(
           {
             "prenom":[utilisateur.prenom,[Validators.required, Validators.minLength(3)]],
@@ -50,7 +51,7 @@ export class PageEditionUtilisateurComponent implements OnInit {
 
   onChangeFile(event:any){
     this.image = event.target.files[0];
-   
+
   }
 
 
@@ -64,7 +65,7 @@ export class PageEditionUtilisateurComponent implements OnInit {
       formData.append("image",this.image);
       formData.append("utilisateur",JSON.stringify(utilisateur))
 
-      this.client.post("http://demo.php/back-end-angular-dw1-2022/edition-utilisateur.php",
+      this.client.post("http://"+ environment.adresseServeur+"edition-utilisateur.php",
       formData,
       { responseType: 'text'}
       ).subscribe(resultat =>

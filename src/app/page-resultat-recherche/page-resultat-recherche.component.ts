@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-page-resultat-recherche',
@@ -12,20 +13,21 @@ export class PageResultatRechercheComponent implements OnInit {
    { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(parametres => this.client.get ("http://demo.php/back-end-angular-dw1-2022/recherche.php" +"?recherche="+ parametres['recherche']).subscribe(reponse => this.listeUtilisateur = reponse))
+    this.route.params.subscribe(parametres => this.client.get ("http://"+ environment.adresseServeur+"recherche.php" +"?recherche="+ parametres['recherche']).subscribe(reponse => this.listeUtilisateur = reponse))
   }
 
   public listeUtilisateur:any = [];
+  public adresseServeur = environment.adresseServeur;
 
   rechargerListeUtilisateur(){
     this.client
-    .get("http://demo.php/back-end-angular-dw1-2022/liste-utilisateur.php")
+    .get("http://"+ environment.adresseServeur+"liste-utilisateur.php")
     .subscribe(reponse=> this.listeUtilisateur =reponse)
   }
 
   onClickDelete(idUtilisateur : number) {
     this.client
-    .get("http://demo.php/back-end-angular-dw1-2022/supprime-utilisateur.php?id=" + idUtilisateur)
+    .get("http://"+ environment.adresseServeur+"supprime-utilisateur.php?id=" + idUtilisateur)
     .subscribe(reponse=> this.rechargerListeUtilisateur())
   }
 }
